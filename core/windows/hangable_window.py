@@ -30,12 +30,15 @@ class HangableWindow(Window):
 
     @classproperty
     def hangable_windows(cls):
+        'Returns a list of all running hangable windows.'
         return [window for window in cls.all_windows if hasattr(window, 'is_hanging')]
 
     @classproperty
     def hanging_windows(cls):
+        'Returns a list of all currently hanging windows.'
         return [window for window in cls.all_windows if hasattr(window, 'is_hanging') and window.is_hanging is True]
 
     @classproperty
     def non_hanging_windows(cls):
+        'Returns a list of all hangable windows that are not hanging.'
         return [window for window in cls.all_windows if hasattr(window, 'is_hanging') and window.is_hanging is False]
