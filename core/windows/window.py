@@ -21,6 +21,11 @@ class Window(Tk):
         self._owner = owner
 
     def __new__(cls, *args, **kwargs):
-        instance = cls(*args, **kwargs)
-        all_windows.append(instance)
+        instance = super().__new__(cls)
+        cls.all_windows.append(instance)
         return instance
+
+    def destroy(self, *args, **kwargs):
+        Window.all_windows.remove(self)
+
+        super().destroy(*args, **kwargs)
