@@ -18,14 +18,18 @@ class Window(Tk):
     def __init__(self, owner, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self._owner = owner
+        Window.all_windows.append(self)
 
-    def __new__(cls, *args, **kwargs):
-        instance = super().__new__(cls)
-        cls.all_windows.append(instance)
-        return instance
+        self._owner = owner
+        self._children = list()
+
+        if issubclass(type(owner), Window):
+        	self._owner._children.append(self)
 
     def destroy(self, *args, **kwargs):
         Window.all_windows.remove(self)
+
+        for child in self._children:
+        	child.destroy()
 
         super().destroy(*args, **kwargs)
