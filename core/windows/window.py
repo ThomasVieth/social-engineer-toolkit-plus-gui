@@ -27,6 +27,7 @@ class Window(Tk):
         	self._owner._children.append(self)
 
     def destroy(self, *args, **kwargs):
+        'Destroys the current window and any children opened by the current window.'
         Window.all_windows.remove(self)
 
         for child in self._children:
