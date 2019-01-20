@@ -11,7 +11,7 @@ from os.path import abspath, isfile, join
 
 ## Getting configuration directory
 
-current_working_directory = getcwd()
+current_working_directory = __file__[:-11]
 
 ## Configuration cache
 
