@@ -16,7 +16,7 @@ __all__ = ('HangableWindow', )
 
 class HangableWindow(Window):
 
-    def __init__(self, *args **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.is_hanging = False
