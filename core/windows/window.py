@@ -30,6 +30,9 @@ class Window(Tk):
         'Destroys the current window and any children opened by the current window.'
         Window.all_windows.remove(self)
 
+        if self._owner:
+            self._owner._children.remove(self)
+
         for child in self._children:
         	child.destroy()
 
