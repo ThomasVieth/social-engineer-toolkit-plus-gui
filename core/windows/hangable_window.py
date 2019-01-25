@@ -24,7 +24,7 @@ class HangableWindow(Window):
     @classmethod
     def hangable_method(cls, method):
         def decorator(self, *args, **kwargs):
-            if not self.is_hanging:
+            if not method.is_hanging:
                 return method(self, *args, **kwargs)
         return decorator
 
