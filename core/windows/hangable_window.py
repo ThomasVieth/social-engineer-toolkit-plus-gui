@@ -23,6 +23,11 @@ class HangableWindow(Window):
 
         self.is_hanging = False
 
+    def destroy(self, *args, **kwargs):
+        super().destroy(*args, **kwargs)
+
+        self.is_hanging = False
+
     @classmethod
     def hangable_method(cls, method):
         @wraps(method)
