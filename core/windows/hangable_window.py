@@ -9,6 +9,8 @@ from .window import Window
 
 from ..helpers import classproperty
 
+from functools import wraps
+
 ## All declaration for import *
 __all__ = ('HangableWindow', )
 
@@ -23,6 +25,7 @@ class HangableWindow(Window):
 
     @classmethod
     def hangable_method(cls, method):
+        @wraps(method)
         def decorator(self, *args, **kwargs):
             if not method.is_hanging:
                 return method(self, *args, **kwargs)
