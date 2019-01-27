@@ -6,55 +6,43 @@
 
 ## Imports
 
+from .set import AttackWindow
 from ..core.windows import OptionWindow
 
 ##
 
 class MainWindow(OptionWindow):
 
-    @OptionWindow.method_as_option("1. Hang This Window")
-    @OptionWindow.hangable_method
-    def test1(self, *args, **kwargs):
-        self.is_hanging = True
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    @OptionWindow.method_as_option("2. Unhang Other Window")
-    @OptionWindow.hangable_method
-    def test2(self, *args, **kwargs):
-        main_menu2.is_hanging = False
+        self.add_option("Social-Engineering Attacks", self.sub_to_attacks)
+        self.add_option("Penetration Testing (Fast-Track)", self.sub_to_pentest)
+        self.add_option("Third Party Modules", self.sub_to_thirdparty)
+        self.add_option("Update the Social-Engineer Toolkit", self.sub_to_update)
+        self.add_option("Update SET configuration", self.sub_to_config)
+        self.add_option("Help, Credits, and About", self.sub_to_help)
 
-    @OptionWindow.method_as_option("3. Is Other Window Hanging?")
-    @OptionWindow.hangable_method
-    def test3(self, *args, **kwargs):
-        print(main_menu2.is_hanging)
+    def sub_to_attacks(self, *args, **kwargs):
+        attack_menu = AttackWindow("SE Toolkit - Attacks", self)
+        attack_menu.display_options()
 
-    def destroy(self, *args, **kwargs):
-        super().destroy(*args, **kwargs)
+    def sub_to_pentest(self, *args, **kwargs):
+        print("Test 2")
 
-        main_menu2.is_hanging = False
+    def sub_to_thirdparty(self, *args, **kwargs):
+        print("Test 3")
 
-class MainWindow2(OptionWindow):
+    def sub_to_update(self, *args, **kwargs):
+        print("Test 4")
 
-    @OptionWindow.method_as_option("1. Hang This Window")
-    @OptionWindow.hangable_method
-    def test1(self, *args, **kwargs):
-        self.is_hanging = True
+    def sub_to_config(self, *args, **kwargs):
+        print("Test 5")
 
-    @OptionWindow.method_as_option("2. Unhang Other Window")
-    @OptionWindow.hangable_method
-    def test2(self, *args, **kwargs):
-        main_menu.is_hanging = False
-
-    @OptionWindow.method_as_option("3. Is Other Window Hanging?")
-    @OptionWindow.hangable_method
-    def test3(self, *args, **kwargs):
-        print(main_menu.is_hanging)
-
-    def destroy(self, *args, **kwargs):
-        super().destroy(*args, **kwargs)
-
-        main_menu.is_hanging = False
+    def sub_to_help(self, *args, **kwargs):
+        print("Test 6")
 
 ##
 
-main_menu = MainWindow("SE Toolkit GUI 1", None)
-main_menu2 = MainWindow2("SE Toolkit GUI 2", main_menu)
+main_menu = MainWindow("SE Toolkit", None)
+main_menu.display_options()
