@@ -38,18 +38,19 @@ class OptionWindow(HangableWindow):
 
     def setup_options(self):
         y_spacer = self.y
-        for attr_name in dir(self):
-            attr = getattr(self, attr_name)
-            if callable(attr) and hasattr(attr, 'text'):
-                label = Label(self, text=attr.text, fg=self.font_color, font=(self.font_type, self.font_size))
-                label.place(x=self.x, y=y_spacer)
-                label.bind("<Button-1>", attr)
-                y_spacer += self.spacer
+        for option in self._options:
+            label = Label(self, text=option.text, fg=self.font_color, font=(self.font_type, self.font_size))
+            label.place(x=self.x, y=y_spacer)
+            label.bind("<Button-1>", option)
+            y_spacer += self.spacer
         return round(y_spacer / self.spacer)
 
     @classmethod
     def method_as_option(cls, option_text):
+        if not hasattr(cls, 'options'):
+            cls._options = list()
         def decorator(method):
+            cls._options.append(method)
             method.text = option_text
             @wraps(method)
             def wrapper(self, *args, **kwargs):
