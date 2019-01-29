@@ -6,16 +6,14 @@
 
 ## Imports
 
-from ...core.windows import OptionWindow
+from ...core.frame import OptionFrame
 
 ##
 
-class AttackWindow(OptionWindow):
+class AttackFrame(OptionFrame):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        self._owner.withdraw()
 
         self.add_option("Spear-Phishing Attack Vectors", self.sub_to_spear)
         self.add_option("Website Attack Vectors", self.sub_to_web)
@@ -57,8 +55,3 @@ class AttackWindow(OptionWindow):
 
     def sub_to_sms(self, *args, **kwargs):
         print("Test 10")
-
-    def destroy(self, *args, **kwargs):
-        super().destroy(*args, **kwargs)
-
-        self._owner.deiconify()

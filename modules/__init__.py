@@ -6,12 +6,16 @@
 
 ## Imports
 
-from .set import AttackWindow
-from ..core.windows import OptionWindow
+from ..core.frame import ContainerFrame, OptionFrame
+from ..core.window import Window
+
+from .set import AttackFrame
+
+from tkinter import Frame, Label, BOTH, TOP
 
 ##
 
-class MainWindow(OptionWindow):
+class MainFrame(OptionFrame):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,9 +27,12 @@ class MainWindow(OptionWindow):
         self.add_option("Update SET configuration", self.sub_to_config)
         self.add_option("Help, Credits, and About", self.sub_to_help)
 
+        self.resize_window()
+
     def sub_to_attacks(self, *args, **kwargs):
-        attack_menu = AttackWindow("SE Toolkit - Attacks", self)
-        attack_menu.display_options()
+        frame = self.master.get_frame("AttackFrame")
+        frame.resize_window()
+        frame.tkraise()
 
     def sub_to_pentest(self, *args, **kwargs):
         print("Test 2")
@@ -44,5 +51,13 @@ class MainWindow(OptionWindow):
 
 ##
 
-main_menu = MainWindow("SE Toolkit", None)
-main_menu.display_options()
+main_menu = Window("SE Toolkit", None)
+main_menu.resizable(False, False)
+
+container_frame = ContainerFrame(main_menu)
+container_frame.pack(side=TOP, fill=BOTH, expand=True)
+
+main_frame = container_frame.add_frame(MainFrame)
+attack_frame = container_frame.add_frame(AttackFrame)
+
+main_frame.tkraise()
