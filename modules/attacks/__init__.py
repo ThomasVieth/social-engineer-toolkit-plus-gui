@@ -26,6 +26,8 @@ class AttackFrame(OptionFrame):
         self.add_option("Powershell Attack Vectors", self.sub_to_powershell)
         self.add_option("SMS Spoofing Attack Vector", self.sub_to_sms)
 
+        self.menu.add_command(label="Back", command=self.back)
+
     def sub_to_spear(self, *args, **kwargs):
         print("Test 1")
 
@@ -55,3 +57,9 @@ class AttackFrame(OptionFrame):
 
     def sub_to_sms(self, *args, **kwargs):
         print("Test 10")
+
+    def back(self, *args, **kwargs):
+        frame = self.master.get_frame("MainFrame")
+        frame.reset_menu()
+        frame.resize_window()
+        frame.tkraise()
