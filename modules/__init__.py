@@ -9,7 +9,7 @@
 from ..core.frame import ContainerFrame, OptionFrame
 from ..core.window import Window
 
-from .set import AttackFrame
+from .attacks import AttackFrame
 
 from tkinter import Frame, Label, BOTH, TOP
 
